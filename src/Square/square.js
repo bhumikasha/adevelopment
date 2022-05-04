@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import './square.css';
 
-function Square() {
-    return <button className="square"></button>
+function Square(props) {
+console.log(props);
+    return <button className="square" onClick={props.onClick}>{props.value}</button>
 }
 
 export default Square;
