@@ -4,7 +4,8 @@ import './board.css';
 
 function Board() {
     const[squares, setSquares] = useState(Array(9).fill(null));
-    const[xIsNext, setXIsNext] = useState(true)
+    const[xIsNext, setXIsNext] = useState(true);
+    const[finalStatus, setSfinalStatus] = useState();
 
     function handleClick(i) {
         console.log(i);
@@ -39,12 +40,21 @@ function Board() {
         }
         return null;
       }
-
-    const status = 'Next player: ' + (xIsNext ? 'X' : 'O');
+      
+      let status;
+      function calculateFinalWinner() {
+        const winner = calculateWinner(this.state.squares);
+        if (winner) {
+          setSfinalStatus('Winner');
+        } else {
+          status = 'Next player: ' + (xIsNext ? 'X' : 'O');
+          setSfinalStatus(status);
+        }
+      }
 
     return <center >
-        
-        <div>{status}</div>
+      <button onClick={calculateFinalWinner}>Calculate</button>
+      {status}
         <div>
             {renderSquare(0)}
             {renderSquare(1)}
